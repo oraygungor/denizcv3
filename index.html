@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deniz Süzen - CV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .print-button {
+            transition: all 0.3s ease;
+        }
+        .print-button:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* --- REFINED PRINT STYLES FOR PERFECT OUTPUT --- */
+        @media print {
+            /* Rule to remove browser-generated headers and footers */
+            @page {
+                size: A4;
+                margin: 0;
+            }
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                height: 100%;
+                background-color: #fff;
+                font-size: 9.5pt; /* Optimal base font size for A4 print */
+                line-height: 1.35;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+            .print-container > .bg-white {
+                height: 100%;
+                border-radius: 0 !important;
+                overflow: hidden;
+            }
+            /* Preserve the grid layout for print */
+            .print-grid-reset {
+                 display: grid !important;
+                 grid-template-columns: 1fr 2fr !important; /* Enforce 1/3 and 2/3 columns */
+                 height: 100%;
+            }
+            .print-full-width {
+                padding: 1.75rem !important; /* Consistent padding */
+            }
+            /* Force background colors and text colors to print */
+            .bg-slate-800 {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #1e293b !important;
+            }
+            .text-white, .text-slate-200, .text-slate-300, .text-slate-400 {
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 color: #fff !important;
+            }
+            .border-slate-600 {
+                -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 border-color: #475569 !important;
+            }
+             .border-slate-500 {
+                -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
+                 border-color: #64748b !important;
+            }
+            /* Fine-tune font sizes for print */
+            h1.text-3xl { font-size: 22pt !important; }
+            h3.text-xl { font-size: 14pt !important; }
+            h3.text-lg { font-size: 12pt !important; }
+            
+            /* Fine-tune spacing for print */
+            .mt-10 { margin-top: 1.5rem !important; }
+            .mt-8 { margin-top: 1.25rem !important; }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem !important; }
+            .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem !important; }
+            .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.4rem !important; }
+            .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.2rem !important; }
+            
+            /* Fine-tune image size for print */
+            .rounded-full {
+                width: 120px !important;
+                height: 120px !important;
+                margin-bottom: 0.75rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Top control bar for language and print -->
+    <div class="no-print fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto p-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-slate-800">Deniz Süzen</span>
+                <span class="text-slate-400">|</span>
+                <span data-lang="tr" class="font-medium">İnteraktif CV</span>
+                <span data-lang="en" class="font-medium hidden">Interactive CV</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Language Switcher -->
+                <div class="flex items-center bg-slate-200 rounded-full p-1">
+                    <button id="lang-tr" class="px-3 py-1 text-sm font-semibold rounded-full bg-slate-800 text-white" onclick="switchLanguage('tr')">TR</button>
+                    <button id="lang-en" class="px-3 py-1 text-sm font-semibold rounded-full text-slate-600" onclick="switchLanguage('en')">EN</button>
+                </div>
+                <!-- Print Button -->
+                <button onclick="window.print()" class="print-button bg-slate-800 text-white px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2">
+                    <i class="fas fa-print"></i>
+                    <span data-lang="tr">PDF Olarak Yazdır</span>
+                    <span data-lang="en" class="hidden">Print as PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main CV container -->
+    <main class="max-w-6xl mx-auto p-4 sm:p-8 lg:p-12 mt-32 sm:mt-20 print-container">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-3 print-grid-reset">
+                
+                <!-- Left Column: Contact, Skills, Languages -->
+                <aside class="md:col-span-1 bg-slate-800 text-white p-6 md:p-8 print-full-width">
+                    <!-- Profile Picture and Name -->
+                    <div class="flex flex-col items-center text-center">
+                        <img src="https://i.imgur.com/8ADaUrG.jpeg" alt="Deniz Süzen" class="rounded-full w-36 h-36 border-4 border-slate-500 object-cover mb-4">
+                        <h1 class="text-3xl font-bold text-white">DENİZ SÜZEN</h1>
+                        <p class="text-slate-300 mt-1" data-lang="tr">Proje Yöneticisi</p>
+                        <p class="text-slate-300 mt-1 hidden" data-lang="en">Project Manager</p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="mt-10 print-break-inside-avoid">
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4" data-lang="tr">İLETİŞİM</h3>
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4 hidden" data-lang="en">CONTACT</h3>
+                        <ul class="space-y-3 text-sm text-slate-200">
+                            <li><i class="fas fa-map-marker-alt w-5 mr-2 text-slate-400"></i>Antalya, Türkiye</li>
+                            <li><i class="fas fa-phone w-5 mr-2 text-slate-400"></i>+90 531 791 5020</li>
+                            <li><i class="fas fa-envelope w-5 mr-2 text-slate-400"></i>denizsuzen5@gmail.com</li>
+                            <li><i class="fab fa-linkedin w-5 mr-2 text-slate-400"></i><a href="#" class="hover:text-white"><span data-lang="tr">LinkedIn Profili</span><span data-lang="en" class="hidden">LinkedIn Profile</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4" data-lang="tr">YETKİNLİKLER</h3>
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4 hidden" data-lang="en">SKILLS</h3>
+                        <div class="space-y-4 text-sm">
+                            <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                <li data-lang="tr">Proje Yönetimi</li><li data-lang="en" class="hidden">Project Management</li>
+                                <li data-lang="tr">Hibe ve Fon Yönetimi</li><li data-lang="en" class="hidden">Grant & Fund Management</li>
+                                <li data-lang="tr">Bütçe Planlama ve Raporlama</li><li data-lang="en" class="hidden">Budget Planning & Reporting</li>
+                                <li data-lang="tr">Disiplinler Arası Takım Liderliği</li><li data-lang="en" class="hidden">Cross-Functional Team Leadership</li>
+                                <li data-lang="tr">Paydaş İletişimi</li><li data-lang="en" class="hidden">Stakeholder Communication</li>
+                                <li data-lang="tr">Teknik Raporlama</li><li data-lang="en" class="hidden">Technical Reporting</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Languages -->
+                    <div class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4" data-lang="tr">DİLLER</h3>
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4 hidden" data-lang="en">LANGUAGES</h3>
+                        <div class="space-y-2 text-sm text-slate-200">
+                            <p><span class="font-semibold" data-lang="tr">Türkçe:</span><span class="font-semibold hidden" data-lang="en">Turkish:</span> <span data-lang="tr">Ana Dil</span><span class="hidden" data-lang="en">Native</span></p>
+                            <p><span class="font-semibold" data-lang="tr">İngilizce:</span><span class="font-semibold hidden" data-lang="en">English:</span> <span data-lang="tr">İleri Düzey (C2)</span><span class="hidden" data-lang="en">Professional Proficiency (C2)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Interests -->
+                    <div class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4" data-lang="tr">İLGİ ALANLARI</h3>
+                        <h3 class="text-lg font-bold text-slate-300 border-b-2 border-slate-600 pb-2 mb-4 hidden" data-lang="en">INTERESTS</h3>
+                        <div class="text-sm text-slate-200">
+                            <p data-lang="tr">Tenis, Snowboard, Keman, Dans, Tırmanış, Seyahat</p>
+                            <p data-lang="en" class="hidden">Tennis, Snowboarding, Violin, Dancing, Climbing, Traveling</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Column: Summary, Experience, Education, Qualifications -->
+                <div class="md:col-span-2 p-6 md:p-8 print-full-width">
+                    <!-- Summary -->
+                    <section>
+                        <p data-lang="tr" class="text-slate-600 leading-relaxed">
+                            Ar-Ge projelerini fikir aşamasından tamamlanma sürecine kadar yöneten, çözüm odaklı ve analitik bir Proje Yöneticisiyim. Ulusal ve uluslararası hibe programlarının karmaşık süreçlerinde edindiğim deneyim sayesinde, belirsizlikleri fırsata dönüştürme ve süreçleri netleştirme becerisine sahibim. Disiplinler arası ekipleri bir araya getirerek iş birliği kültürünü güçlendirmeyi, projelerin hedefe uygun ve sürdürülebilir şekilde ilerlemesini sağlamayı öncelik edinirim. Yenilikçi bakış açım, detaylara verdiğim önem ve stratejik yaklaşımım ile çalıştığım kurumların gelişimine değer katmayı hedeflerim.
+                        </p>
+                        <p data-lang="en" class="text-slate-600 leading-relaxed hidden">
+                           I am a solution-oriented and analytical Project Manager, experienced in leading R&D projects from concept to completion. With strong expertise in navigating the complexities of national and international funding programs, I excel at turning uncertainties into opportunities and bringing clarity to challenging processes. I am passionate about fostering collaboration within cross-functional teams, ensuring projects progress in a sustainable and goal-driven manner. My innovative mindset, attention to detail, and strategic perspective enable me to consistently add value and contribute to the long-term growth of the organizations I work with.
+                        </p>
+                    </section>
+
+                    <!-- Work Experience -->
+                    <section class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4" data-lang="tr">İŞ DENEYİMİ</h3>
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4 hidden" data-lang="en">WORK EXPERIENCE</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="font-bold text-slate-700" data-lang="tr">Proje Yöneticisi</h4>
+                                    <h4 class="font-bold text-slate-700 hidden" data-lang="en">Project Manager</h4>
+                                    <p class="text-sm text-slate-500" data-lang="tr">Şubat 2021 - Günümüz</p>
+                                    <p class="text-sm text-slate-500 hidden" data-lang="en">February 2021 - Present</p>
+                                </div>
+                                <p class="text-sm text-slate-600 italic">IMECAR ELEKTRONİK SAN. VE TİC. LTD. ŞTİ., Antalya</p>
+                                
+                                <div class="mt-3">
+                                    <h5 class="font-semibold text-slate-600 text-sm mb-2" data-lang="tr">Temel Sorumluluklar</h5>
+                                    <h5 class="font-semibold text-slate-600 text-sm mb-2 hidden" data-lang="en">Core Responsibilities</h5>
+                                    <ul class="list-disc list-inside space-y-1 text-slate-600 text-sm">
+                                        <li data-lang="tr">Ulusal ve uluslararası fonlu projelerin teknik ve mali süreçlerini uçtan uca planlayıp, yürüterek ve raporlayarak proje hedeflerine ulaşılmasını sağlamak.</li>
+                                        <li data-lang="en" class="hidden">Planned, executed, and reported end-to-end technical and financial processes of nationally and internationally funded projects to ensure successful delivery.</li>
+                                        <li data-lang="tr">Proje bütçelerini yöneterek finansal planlara uyumu güvence altına almak ve düzenli mali raporlama süreçlerini koordine etmek.</li>
+                                        <li data-lang="en" class="hidden">Managed project budgets to ensure compliance with financial plans and coordinated regular financial reporting.</li>
+                                        <li data-lang="tr">Disiplinler arası ekipler ve dış paydaşlarla etkin iş birliği geliştirerek proje çıktılarının sürdürülebilirliğini sağlamak.</li>
+                                        <li data-lang="en" class="hidden">Fostered effective collaboration with cross-functional teams and external stakeholders to achieve project goals and sustain long-term outcomes.</li>
+                                        <li data-lang="tr">Dış kaynaklı destekleri araştırıp yenilikçi proje fikirleri geliştirmek, proje önerileri hazırlamak ve yatırım teşvikleri başvurularını yönetmek.</li>
+                                        <li data-lang="en" class="hidden">Researched external funding opportunities, developed project concepts, prepared proposals, and managed investment incentive applications.</li>
+                                        <li data-lang="tr">Şirketin yurtdışı pazar girişimlerini desteklemek amacıyla kira, belgelendirme ve fuar gibi teşviklerin başvuru ve yürütme süreçlerini yönetmek.</li>
+                                        <li data-lang="en" class="hidden">Led application and execution processes for grants supporting international market expansion, including rental, certification, and trade fair incentives.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                    <h5 class="font-semibold text-slate-600 text-sm mb-2" data-lang="tr">Öne Çıkan Başarılar</h5>
+                                    <h5 class="font-semibold text-slate-600 text-sm mb-2 hidden" data-lang="en">Key Achievements</h5>
+                                    <ul class="list-disc list-inside space-y-1 text-slate-600 text-sm">
+                                        <li data-lang="tr">Toplam bütçesi 3 milyon €’yu aşan ve 6 projeden oluşan (4 AB, 2 Ulusal) tüm hibeli proje portföyünü başarıyla yönetti.</li>
+                                        <li data-lang="en" class="hidden">Successfully managed the company's entire grant project portfolio, consisting of 6 projects (4 EU, 2 National) with a total budget exceeding €3 million.</li>
+                                        <li data-lang="tr">4 büyük Ar-Ge projesi (2 TÜBİTAK, 2 Horizon Europe) için başvuru süreçlerini uçtan uca yöneterek şirkete yeni fon kaynakları kazandırdı.</li>
+                                        <li data-lang="en" class="hidden">Secured new funding sources for the company by leading the end-to-end application process for 4 major R&D projects (2 TÜBİTAK, 2 Horizon Europe).</li>
+                                        <li data-lang="tr">Şirketin resmi Ar-Ge Merkezi olma sürecini başından sona yöneterek, mevzuata tam uyum sağladı.</li>
+                                        <li data-lang="en" class="hidden">Coordinated the company's official R&D Center certification process from start to finish, ensuring full regulatory compliance.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                             <div>
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="font-bold text-slate-700" data-lang="tr">İthalat & E-Ticaret Uzmanı</h4>
+                                    <h4 class="font-bold text-slate-700 hidden" data-lang="en">Import & E-Commerce Specialist</h4>
+                                    <p class="text-sm text-slate-500" data-lang="tr">Haziran 2020 - Şubat 2021</p>
+                                    <p class="text-sm text-slate-500 hidden" data-lang="en">June 2020 - February 2021</p>
+                                </div>
+                                <p class="text-sm text-slate-600 italic">EKAY ELEKTRİK MÜHENDİSLİK, Antalya</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600 text-sm">
+                                    <li data-lang="tr">Teknolojik cihazların Türkiye'ye ithalat operasyonlarını yönetti; sorunsuz teslimat sağlamak için tedarik, lojistik ve gümrük süreçlerini denetledi.</li>
+                                    <li data-lang="en" class="hidden">Managed import operations of technological devices into Turkey, overseeing procurement, logistics, and customs to ensure smooth delivery.</li>
+                                    <li data-lang="tr">E-ticaret ticarileştirme süreçlerine liderlik etti, online satış stratejilerini optimize etti ve pazar varlığını güçlendirdi.</li>
+                                    <li data-lang="en" class="hidden">Led e-commerce commercialization, optimizing online sales strategies and strengthening market presence.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="font-bold text-slate-700" data-lang="tr">Teknoloji Transfer Ofisi Asistanı</h4>
+                                    <h4 class="font-bold text-slate-700 hidden" data-lang="en">Technology Transfer Office Assistant</h4>
+                                    <p class="text-sm text-slate-500" data-lang="tr">Eylül 2018 - Haziran 2019</p>
+                                    <p class="text-sm text-slate-500 hidden" data-lang="en">September 2018 - June 2019</p>
+                                </div>
+                                <p class="text-sm text-slate-600 italic" data-lang="tr">ANTALYA BİLİM ÜNİVERSİTESİ</p>
+                                <p class="text-sm text-slate-600 italic hidden" data-lang="en">ANTALYA BILIM UNIVERSITY</p>
+                                <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600 text-sm">
+                                    <li data-lang="tr">Üniversite TTO'suna sanayi inovasyon projelerine danışmanlık yapma ve teknoloji transferi stratejilerini güçlendirme konularında destek oldu.</li>
+                                    <li data-lang="en" class="hidden">Supported the University TTO in advising industry innovation projects and strengthening technology transfer strategies.</li>
+                                    <li data-lang="tr">Araştırmacıları ve şirketleri ilgili fon olanaklarına yönlendirerek ticarileşme ve proje başarısına katkı sağladı.</li>
+                                    <li data-lang="en" class="hidden">Guided researchers and companies to relevant funding opportunities, contributing to commercialization and project success.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Leadership & Activities -->
+                    <section class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4" data-lang="tr">LİDERLİK & AKTİVİTELER</h3>
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4 hidden" data-lang="en">LEADERSHIP & ACTIVITIES</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600 text-sm">
+                           <li data-lang="tr">Su kaynaklarının sürdürülebilirliğini artırmaya odaklanan bitirme projesi için TÜBİTAK fonu sağladı; proje kapsamında beton laboratuvarı kurdu.</li>
+                           <li data-lang="en" class="hidden">Secured TÜBİTAK funding for a senior project on water resource sustainability, establishing a concrete laboratory as part of the initiative.</li>
+                           <li data-lang="tr">Antalya Bilim Üniversitesi IEEE Topluluğu'nu kurdu ve başkanlığını yürüttü.</li>
+                           <li data-lang="en" class="hidden">Initiated and chaired the Antalya Bilim University IEEE Society.</li>
+                           <li data-lang="tr">Boğaziçi Üniversitesi tarafından düzenlenen Uluslararası Çelik Köprü Yarışması'na (DE&CO) katıldı.</li>
+                           <li data-lang="en" class="hidden">Participated in the Design & Construct International Student Steel Bridge Competition (DE&CO).</li>
+                        </ul>
+                    </section>
+
+                     <!-- Education -->
+                     <section class="mt-8 print-break-inside-avoid">
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4" data-lang="tr">EĞİTİM</h3>
+                        <h3 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-4 hidden" data-lang="en">EDUCATION</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="font-bold text-slate-700" data-lang="tr">Lisans Derecesi, İnşaat Mühendisliği</h4>
+                                    <h4 class="font-bold text-slate-700 hidden" data-lang="en">Bachelor's Degree, Civil Engineering</h4>
+                                    <p class="text-sm text-slate-500">2019</p>
+                                </div>
+                                <p class="text-sm text-slate-600" data-lang="tr">Antalya Bilim Üniversitesi, Antalya</p>
+                                <p class="text-sm text-slate-600 hidden" data-lang="en">Antalya Bilim University, Antalya</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Function to switch language
+        function switchLanguage(lang) {
+            // Get all elements that have a lang attribute
+            const elements = document.querySelectorAll('[data-lang]');
+            
+            elements.forEach(el => {
+                if (el.dataset.lang === lang) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            // Update button styles
+            const trButton = document.getElementById('lang-tr');
+            const enButton = document.getElementById('lang-en');
+
+            if (lang === 'tr') {
+                trButton.classList.add('bg-slate-800', 'text-white');
+                trButton.classList.remove('text-slate-600');
+                enButton.classList.add('text-slate-600');
+                enButton.classList.remove('bg-slate-800', 'text-white');
+                document.documentElement.lang = 'tr';
+            } else {
+                enButton.classList.add('bg-slate-800', 'text-white');
+                enButton.classList.remove('text-slate-600');
+                trButton.classList.add('text-slate-600');
+                trButton.classList.remove('bg-slate-800', 'text-white');
+                document.documentElement.lang = 'en';
+            }
+        }
+
+        // Initialize with Turkish language
+        document.addEventListener('DOMContentLoaded', () => {
+            switchLanguage('tr');
+        });
+    </script>
+
+</body>
+</html>
